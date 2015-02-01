@@ -1,0 +1,17 @@
+{
+    "id":"RpgSystem",
+    "version":"0.0.1",
+    "author":"Esa-Petri <esereja@yahoo.co.uk>",
+    "displayName":"RRG game play system",
+    "description":"Bit like D&D but different",
+    "dependencies":[{
+		"id" : "Core",
+		"minVersion" : "0.1.0"
+ 			},
+			{
+		"id" : "Breathing",
+		"minVersion" : "0.1.0"
+ 			}
+		],
+    "isServerSideOnly":false
+}
