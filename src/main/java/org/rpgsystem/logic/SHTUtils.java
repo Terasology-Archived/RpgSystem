@@ -16,6 +16,7 @@
 package org.rpgsystem.logic;
 
 import org.rpgsystem.logic.component.HungerComponent;
+import org.rpgsystem.logic.component.RPGComponent;
 import org.rpgsystem.logic.component.StaminaComponent;
 import org.rpgsystem.logic.component.ThaumaComponent;
 import org.rpgsystem.logic.component.ThirstComponent;
@@ -50,17 +51,24 @@ public final class SHTUtils {
         
         float reGen = 0;
         float seconds=(gameTime - stamina.lastCalculationTime) / 1000f;
-		if(stamina.decreaseTimeLeft>0){
-			if(seconds>stamina.decreaseTimeLeft){
-				seconds-=stamina.decreaseTimeLeft;
-				reGen+=stamina.decreaseTimeLeft*stamina.decreasedReGenRatio;
-				reGen+=stamina.reGenPerSecond * seconds;
-			}else{
-				reGen+=stamina.decreaseTimeLeft*seconds;
-			}
-		}else{
-			reGen+=stamina.reGenPerSecond * seconds;
-		}
+
+    	int s=0;
+    	float currentStamina=stamina.lastStamina;
+    	while(s<seconds){
+    		if(currentStamina<stamina.decreasedReGenThreshold){
+    			stamina.decreaseTimeLeft+=stamina.ThresholdPunishmentPerSec;
+    		}
+    		if(stamina.decreaseTimeLeft>0){
+    			stamina.decreaseTimeLeft-=1000;
+    			reGen+=stamina.reGenPerSecond*stamina.decreasedReGenRatio;
+    		}else{
+    			reGen+=stamina.reGenPerSecond;
+    		}
+    		if(stamina.isRunning){
+    			reGen-=stamina.sprintStaminaPerSec;
+    		}
+    		s++;
+    	}
 		addHungerForEntity(entity,seconds*stamina.hungerPerReGenRatio);
 		addThirstForEntity(entity,seconds*stamina.thirstPerReGenRatio);
 		stamina.lastCalculationTime=gameTime;
@@ -231,6 +239,18 @@ public final class SHTUtils {
         thirst.lastCalculatedWater=Math.min(thirst.lastCalculatedWater - ammount,thirst.maxWaterCapacity);
         entity.saveComponent(thirst);
         return  thirst.lastCalculatedWater;
+    }
+    
+    public static float getPlayerLvl(EntityRef entity){
+    	RPGComponent rpg = entity.getComponent(RPGComponent.class);
+        if (rpg == null) {
+            return 0;
+        }
+        float lvl=0;
+        
+        
+        
+        return lvl;
     }
     
     

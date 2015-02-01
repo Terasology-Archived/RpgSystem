@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.terasology.hunger;
+package org.rpgsystem.logic;
 
 import org.terasology.entitySystem.systems.BaseComponentSystem;
 import org.terasology.entitySystem.systems.RegisterMode;
@@ -25,12 +25,12 @@ import org.terasology.rendering.nui.NUIManager;
  * @author Marcin Sciesinski <marcins78@gmail.com>
  */
 @RegisterSystem(RegisterMode.CLIENT)
-public class HungerAndThirstClientSystem extends BaseComponentSystem {
+public class SHTClientSystem extends BaseComponentSystem {
     @In
     private NUIManager nuiManager;
 
     @Override
     public void preBegin() {
-        nuiManager.getHUD().addHUDElement("Hunger:HungerAndThirst");
+        nuiManager.getHUD().addHUDElement("RpgSystem:SHTT");
     }
 }

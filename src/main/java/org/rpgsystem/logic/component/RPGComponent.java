@@ -37,6 +37,29 @@ public class RPGComponent implements Component {
 	public float baseActionSpeed;
 	private float actionSpeed;
 	
+	//experience
+	//you get physical experience by time,doing physical activities like running
+	//fighting, crafting and so on anything to do whit Strength,Agility,Constitution
+	
+	//physicall experience can be used to buy atribute points or skills 
+	//which are physical by nature. they can be also converted to universal xp 
+	@Replicate
+	public float physicalExperience;
+	//you get mental experience by casting magic, learning, crafting, 
+	//regonizing objects or stuff and so on anything to do whit Intelligence,Wisdom,Thaumaticy 
+	//or charisma related stuff
+	
+	//mental experience can be used to buy atribute points or skills which are mental by nature
+	//they can be also converted to universal xp
+	@Replicate
+	public float mentalExperience;
+	//experience is gained by converting previous ones to it or by events dealling whit
+	//luck,super natural, deities and other heroic or rare stuff 
+	
+	//experience can be used to buy any Atributes or skills if reguirments are filled(enough xp to buy it)
+	@Replicate
+	public float experience;
+	
 	//Atributes
 	@Replicate
 	public float baseStrength;
@@ -769,7 +792,7 @@ public class RPGComponent implements Component {
 	 * @return false if modifier do not exit on given list
 	 */
 	public boolean removeModifier(Modifier modifier,String name){
-		return removeModifier(modifier.id,name);
+		return removeModifier(modifier.getId(),name);
 	}	
 		
 //--------------------------------------------------------------------------------	

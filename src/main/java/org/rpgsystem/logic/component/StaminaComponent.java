@@ -38,26 +38,35 @@ public class StaminaComponent implements Component {
 
     @Replicate
     public long lastCalculationTime;
+    @Replicate
+    public boolean isRunning=false;
 
     /**
      * The amount of Stamina re generated at each second (below)
      */
     @Replicate
     public float reGenPerSecond = 0.5f;
-
+    
+    @Replicate
     public float hungerPerReGenRatio=0.05f;
+    @Replicate
     public float thirstPerReGenRatio=0.1f;
     
     @Replicate
     public float decreasedReGenThreshold = 0;
 
     @Replicate
-    public float decreasedReGenRatio = 0.3f;
+    public float decreasedReGenRatio = 0.5f;
     
     //milli seconds added to decreaseTimeLeft for every second under decreasedReGenThreshold stamina
     @Replicate
-    public long ThresholdPunishmentPerSec=300;
+    public long ThresholdPunishmentPerSec=3000;
     
     @Replicate
     public long decreaseTimeLeft;
+    
+    @Replicate
+    public float sprintStaminaPerSec=1f;
+    
+    
 }

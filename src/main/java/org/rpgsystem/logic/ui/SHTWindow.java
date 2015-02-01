@@ -15,6 +15,11 @@
  */
 package org.rpgsystem.logic.ui;
 
+import org.rpgsystem.logic.SHTUtils;
+import org.rpgsystem.logic.component.HungerComponent;
+import org.rpgsystem.logic.component.StaminaComponent;
+import org.rpgsystem.logic.component.ThaumaComponent;
+import org.rpgsystem.logic.component.ThirstComponent;
 import org.terasology.entitySystem.entity.EntityRef;
 import org.terasology.logic.players.LocalPlayer;
 import org.terasology.registry.CoreRegistry;
@@ -23,22 +28,20 @@ import org.terasology.rendering.nui.layers.hud.CoreHudWidget;
 import org.terasology.rendering.nui.widgets.UILoadBar;
 
 /**
- * @author Marcin Sciesinski <marcins78@gmail.com>
+ * @author orginal Marcin Sciesinski <marcins78@gmail.com>
  */
-public class HungerAndThirstWindow extends CoreHudWidget {
+public class SHTWindow extends CoreHudWidget {
     @Override
     public void initialise() {
         UILoadBar hunger = find("hunger", UILoadBar.class);
         hunger.bindValue(
                 new Binding<Float>() {
-                    @Override
                     public Float get() {
                         EntityRef character = CoreRegistry.get(LocalPlayer.class).getCharacterEntity();
-                        HungerComponent hunger = character.getComponent(HungerComponent.class);
-                        return HungerAndThirstUtils.getHungerForEntity(character) / hunger.maxFoodCapacity;
+                        HungerComponent hungerComp = character.getComponent(HungerComponent.class);
+                        return SHTUtils.getHungerForEntity(character) / hungerComp.maxFoodCapacity;
                     }
 
-                    @Override
                     public void set(Float value) {
                     }
                 });
@@ -46,42 +49,36 @@ public class HungerAndThirstWindow extends CoreHudWidget {
         UILoadBar thirst = find("thirst", UILoadBar.class);
         thirst.bindValue(
                 new Binding<Float>() {
-                    @Override
                     public Float get() {
                         EntityRef character = CoreRegistry.get(LocalPlayer.class).getCharacterEntity();
-                        ThirstComponent thirst = character.getComponent(ThirstComponent.class);
-                        return HungerAndThirstUtils.getThirstForEntity(character) / thirst.maxWaterCapacity;
+                        ThirstComponent thirstComp = character.getComponent(ThirstComponent.class);
+                        return SHTUtils.getThirstForEntity(character) / thirstComp.maxWaterCapacity;
                     }
 
-                    @Override
                     public void set(Float value) {
                     }
                 });
-            UILoadBar hunger = find("stamina", UILoadBar.class);
-            hunger.bindValue(
+            UILoadBar stamina = find("stamina", UILoadBar.class);
+            stamina.bindValue(
                     new Binding<Float>() {
-                        @Override
                         public Float get() {
                             EntityRef character = CoreRegistry.get(LocalPlayer.class).getCharacterEntity();
-                            StaminaComponent stamina = character.getComponent(StaminaComponent.class);
-                            return StaminaUtils.getStaminaForEntity(character) / stamina.maxStamina;
+                            StaminaComponent staminaComp = character.getComponent(StaminaComponent.class);
+                            return SHTUtils.getStaminaForEntity(character) / staminaComp.maxStamina;
                         }
 
-                        @Override
                         public void set(Float value) {
                         }
                     });
-            UILoadBar hunger = find("thauma", UILoadBar.class);
-            hunger.bindValue(
+            UILoadBar thauma = find("thauma", UILoadBar.class);
+            thauma.bindValue(
                     new Binding<Float>() {
-                        @Override
                         public Float get() {
                             EntityRef character = CoreRegistry.get(LocalPlayer.class).getCharacterEntity();
-                            StaminaComponent stamina = character.getComponent(StaminaComponent.class);
-                            return StaminaUtils.getStaminaForEntity(character) / stamina.maxStamina;
+                            ThaumaComponent thaumaComp = character.getComponent(ThaumaComponent.class);
+                            return SHTUtils.getThaumaForEntity(character) / thaumaComp.maxThaumaCapacity;
                         }
 
-                        @Override
                         public void set(Float value) {
                         }
                     });

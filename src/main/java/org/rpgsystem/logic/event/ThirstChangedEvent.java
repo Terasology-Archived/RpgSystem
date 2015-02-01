@@ -23,9 +23,9 @@ import org.terasology.entitySystem.event.Event;
  *
  * @author 
  */
-public class HungerChangedEvent extends ValueChangedEvent implements Event {
+public class ThirstChangedEvent extends ValueChangedEvent implements Event {
 
-    public HungerChangedEvent(EntityRef instigator, int change) {
+    public ThirstChangedEvent(EntityRef instigator, int change) {
         super(instigator, change);
     }
 }
