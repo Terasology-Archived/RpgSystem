@@ -73,4 +73,58 @@ public class ThirstAuthoritySystem extends BaseComponentSystem {
             instigator.saveComponent(thirst);
         }
     }
+    /*
+         @Command(shortDescription = "Checks your hunger/food level.", runOnServer = true)
+    public String hungerCheck(EntityRef client) {
+        EntityRef character = client.getComponent(ClientComponent.class).character;
+        if (character.hasComponent(HungerComponent.class)) {
+            HungerComponent hunger = character.getComponent(HungerComponent.class);
+            return "Current Food Level: " + SHTUtils.getHungerForEntity(character) + "/" + hunger.maxFoodCapacity;
+        } else {
+            return "You don't have a hunger level.";
+        }
+    }
+
+    @Command(shortDescription = "Sets your current hunger level.", runOnServer = true)
+    public String hungerSet(@CommandParam(value = "FoodLevel") float newFood, EntityRef client) {
+        EntityRef character = client.getComponent(ClientComponent.class).character;
+        if (!character.hasComponent(HungerComponent.class)) {
+            return "You don't have a hunger level.";
+        }
+        HungerComponent hunger = character.getComponent(HungerComponent.class);
+        if (newFood < 0) {
+            hunger.lastCalculatedFood = 0;
+            hunger.lastCalculationTime = time.getGameTimeInMs();
+            character.saveComponent(hunger);
+            return "Food level cannot be below 0. Setting to 0.";
+        }
+        if (newFood > hunger.maxFoodCapacity) {
+            hunger.lastCalculatedFood = hunger.maxFoodCapacity;
+            hunger.lastCalculationTime = time.getGameTimeInMs();
+            character.saveComponent(hunger);
+            return "Food level cannot be above Max Food Capacity. Setting to Max(" + hunger.maxFoodCapacity + ")";
+        }
+        hunger.lastCalculatedFood = newFood;
+        hunger.lastCalculationTime = time.getGameTimeInMs();
+        character.saveComponent(hunger);
+        return "Food level successfully set to: " + newFood;
+    }
+
+    @Command(shortDescription = "Sets your max food level.", runOnServer = true)
+    public String hungerSetMax(@CommandParam(value = "MaxFoodLevel") float newMax, EntityRef client) {
+        EntityRef character = client.getComponent(ClientComponent.class).character;
+        if (!character.hasComponent(HungerComponent.class)) {
+            return "You don't have a hunger level.";
+        }
+        HungerComponent hunger = character.getComponent(HungerComponent.class);
+        if (newMax <= 0) {
+            hunger.maxFoodCapacity = 100;
+            character.saveComponent(hunger);
+            return "Max Food Level cannot be below or equal to 0. Setting to default (100)";
+        }
+        hunger.maxFoodCapacity = newMax;
+        character.saveComponent(hunger);
+        return "Max Food Level successfully set to: " + newMax;
+    }
+     */
 }

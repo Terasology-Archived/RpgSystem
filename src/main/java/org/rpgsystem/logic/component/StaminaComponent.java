@@ -66,7 +66,7 @@ public class StaminaComponent implements Component {
     public long decreaseTimeLeft;
     
     @Replicate
-    public float sprintStaminaPerSec=1f;
+    public float sprintStaminaPerSec=0.6f;
     
     
 }

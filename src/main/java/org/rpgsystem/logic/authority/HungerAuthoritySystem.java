@@ -18,10 +18,7 @@ package org.rpgsystem.logic.authority;
 import org.rpgsystem.logic.SHTUtils;
 import org.rpgsystem.logic.component.FoodComponent;
 import org.rpgsystem.logic.component.HungerComponent;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.terasology.engine.Time;
-import org.terasology.entitySystem.Component;
 import org.terasology.entitySystem.entity.EntityManager;
 import org.terasology.entitySystem.entity.EntityRef;
 import org.terasology.entitySystem.entity.lifecycleEvents.BeforeDeactivateComponent;
@@ -46,6 +43,8 @@ import org.terasology.registry.In;
 @RegisterSystem(RegisterMode.AUTHORITY)
 public class HungerAuthoritySystem extends BaseComponentSystem implements UpdateSubscriberSystem {
 
+	//private static final Logger logger = LoggerFactory.getLogger(HungerAuthoritySystem.class);
+	
     @In
     private EntityManager entityManager;
 
@@ -113,9 +112,12 @@ public class HungerAuthoritySystem extends BaseComponentSystem implements Update
         }
     }
 
+
     @Command(shortDescription = "Checks your hunger/food level.", runOnServer = true)
     public String hungerCheck(EntityRef client) {
         EntityRef character = client.getComponent(ClientComponent.class).character;
+        if(character ==null)
+        	return "no character entity ref";
         if (character.hasComponent(HungerComponent.class)) {
             HungerComponent hunger = character.getComponent(HungerComponent.class);
             return "Current Food Level: " + SHTUtils.getHungerForEntity(character) + "/" + hunger.maxFoodCapacity;

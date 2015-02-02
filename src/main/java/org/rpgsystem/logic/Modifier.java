@@ -15,6 +15,10 @@
  */
 package org.rpgsystem.logic;
 
+import org.terasology.persistence.typeHandling.DeserializationContext;
+import org.terasology.persistence.typeHandling.PersistedData;
+import org.terasology.persistence.typeHandling.SerializationContext;
+
 /**
  * These are modifiers for RPGsystem.
  * they contain id and float value
@@ -68,5 +72,35 @@ public class Modifier{
 	public void setId(String id) {
 		this.id = id;
 	}
+	
+	/**
+	 * turn Modifier object to string
+	 * @return
+	 */
+    public String serialize() {
+        return this.getId()+";"+Float.toString(this.getValue());
+    }
+
+    /**
+     * create new modifier object from serialized string object of it
+     * @param in serialized Modifier object
+     * @return New Modifier
+     */
+    public static Modifier deserialize(final String in) {
+        if (!in.isEmpty()) {
+            String dataString = in;
+            int i=0;
+            String id="";
+            String value="";
+            while(i<dataString.length() &&dataString.charAt(i)!=';'){
+            	id+=dataString.charAt(i);
+            	i++;
+            }
+            i++;
+            value=dataString.substring(i, dataString.length()-1);
+            return new Modifier(id,Float.parseFloat(value));
+        }
+        return null;
+    }
 
 }

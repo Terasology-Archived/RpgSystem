@@ -15,8 +15,9 @@
  */
 package org.rpgsystem.logic.component;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 import org.rpgsystem.logic.Modifier;
 import org.terasology.entitySystem.Component;
@@ -127,181 +128,177 @@ public class RPGComponent implements Component {
 	private float pierceResistance;
 	private float magicalResistance;
 	
-	private ArrayList<Modifier> rangeList;
-	private ArrayList<Modifier> actionSpeedList;
+	private HashSet<String> rangeSet;
+	private HashSet<String> actionSpeedSet;
 	
-	private ArrayList<Modifier> strengthList;
-	private ArrayList<Modifier> agilityList;
-	private ArrayList<Modifier> constitutionList;
-	private ArrayList<Modifier> intelligenceList;
-	private ArrayList<Modifier> wisdomList;
-	private ArrayList<Modifier> thaumaticyList;
-	private ArrayList<Modifier> charismaList;
-	private ArrayList<Modifier> luckList;
+	private HashSet<String> strengthSet;
+	private HashSet<String> agilitySet;
+	private HashSet<String> constitutionSet;
+	private HashSet<String> intelligenceSet;
+	private HashSet<String> wisdomSet;
+	private HashSet<String> thaumaticySet;
+	private HashSet<String> charismaSet;
+	private HashSet<String> luckSet;
 
-	private ArrayList<Modifier> physicalAttackSuccessList;
-	private ArrayList<Modifier> magicalAttackSuccessList;
-	private ArrayList<Modifier> magicalAttackSuccessVarianceList;
-	private ArrayList<Modifier> physicalAttackSuccessVarianceList;
-	private ArrayList<Modifier> criticalPercentageList;
-	private ArrayList<Modifier> criticalRatioList;
+	private HashSet<String> physicalAttackSuccessSet;
+	private HashSet<String> magicalAttackSuccessSet;
+	private HashSet<String> magicalAttackSuccessVarianceSet;
+	private HashSet<String> physicalAttackSuccessVarianceSet;
+	private HashSet<String> criticalPercentageSet;
+	private HashSet<String> criticalRatioSet;
 	
-	private ArrayList<Modifier> physicalDefenseSuccessList;
-	private ArrayList<Modifier> magicalDefenseSuccessList;
+	private HashSet<String> physicalDefenseSuccessSet;
+	private HashSet<String> magicalDefenseSuccessSet;
 	
-	private ArrayList<Modifier> dmgList;
-	private ArrayList<Modifier> bluntDmgList;
-	private ArrayList<Modifier> pierceDmgList;
-	private ArrayList<Modifier> magicalDmgList;
+	private HashSet<String> dmgSet;
+	private HashSet<String> bluntDmgSet;
+	private HashSet<String> pierceDmgSet;
+	private HashSet<String> magicalDmgSet;
 	
-	private ArrayList<Modifier> dmgVarianceList;
-	private ArrayList<Modifier> bluntDmgVarianceList;
-	private ArrayList<Modifier> pierceDmgVarianceList;
-	private ArrayList<Modifier> magicalDmgVarianceList;
+	private HashSet<String> dmgVarianceSet;
+	private HashSet<String> bluntDmgVarianceSet;
+	private HashSet<String> pierceDmgVarianceSet;
+	private HashSet<String> magicalDmgVarianceSet;
 	
-	private ArrayList<Modifier> physicalResistanceList;
-	private ArrayList<Modifier> bluntResistanceList;
-	private ArrayList<Modifier> pierceResistanceList;
-	private ArrayList<Modifier> magicalResistanceList;
+	private HashSet<String> physicalResistanceSet;
+	private HashSet<String> bluntResistanceSet;
+	private HashSet<String> pierceResistanceSet;
+	private HashSet<String> magicalResistanceSet;
 	
-	private ArrayList<Modifier> speedList;
-	private ArrayList<Modifier> healthList;
-	private ArrayList<Modifier> hungerList;
-	private ArrayList<Modifier> thirstList;
-	private ArrayList<Modifier> staminaList;
-	private ArrayList<Modifier> thaumaList;
-	private ArrayList<Modifier> breathList;
+	private HashSet<String> speedSet;
+	private HashSet<String> healthSet;
+	private HashSet<String> hungerSet;
+	private HashSet<String> thirstSet;
+	private HashSet<String> staminaSet;
+	private HashSet<String> thaumaSet;
+	private HashSet<String> breathSet;
 	
 	/**
 	 * 
 	 */
 	public RPGComponent(){
-		this.strengthList=new ArrayList<Modifier>();
-		this.agilityList=new ArrayList<Modifier>();
-		this.constitutionList=new ArrayList<Modifier>();
-		this.intelligenceList=new ArrayList<Modifier>();
-		this.wisdomList=new ArrayList<Modifier>();
-		this.thaumaticyList=new ArrayList<Modifier>();
-		this.charismaList=new ArrayList<Modifier>();
-		this.luckList=new ArrayList<Modifier>();
+		this.strengthSet=new HashSet<String>();
+		this.agilitySet=new HashSet<String>();
+		this.constitutionSet=new HashSet<String>();
+		this.intelligenceSet=new HashSet<String>();
+		this.wisdomSet=new HashSet<String>();
+		this.thaumaticySet=new HashSet<String>();
+		this.charismaSet=new HashSet<String>();
+		this.luckSet=new HashSet<String>();
 		
-		this.strengthList.add(new Modifier("baseStrength",this.baseStrength));
-		this.agilityList.add(new Modifier("baseAgility",this.baseAgility));
-		this.constitutionList.add(new Modifier("baseConstitution",this.baseConstitution));
-		this.intelligenceList.add(new Modifier("baseIntelligence",this.baseIntelligence));
-		this.wisdomList.add(new Modifier("baseWisdom",this.baseWisdom));
-		this.thaumaticyList.add(new Modifier("baseThaumaticy",this.baseThaumaticy));
-		this.charismaList.add(new Modifier("baseCharisma",this.baseCharisma));
-		this.luckList.add(new Modifier("baseLuck",this.baseLuck));
+		this.strengthSet.add(new Modifier("baseStrength",this.baseStrength).serialize());
+		this.agilitySet.add(new Modifier("baseAgility",this.baseAgility).serialize());
+		this.constitutionSet.add(new Modifier("baseConstitution",this.baseConstitution).serialize());
+		this.intelligenceSet.add(new Modifier("baseIntelligence",this.baseIntelligence).serialize());
+		this.wisdomSet.add(new Modifier("baseWisdom",this.baseWisdom).serialize());
+		this.thaumaticySet.add(new Modifier("baseThaumaticy",this.baseThaumaticy).serialize());
+		this.charismaSet.add(new Modifier("baseCharisma",this.baseCharisma).serialize());
+		this.luckSet.add(new Modifier("baseLuck",this.baseLuck).serialize());
 		
-		this.rangeList=new ArrayList<Modifier>();
-		this.actionSpeedList=new ArrayList<Modifier>();
+		this.rangeSet=new HashSet<String>();
+		this.actionSpeedSet=new HashSet<String>();
 		
-		this.rangeList.add(new Modifier("baseRange",this.baseRange));
-		this.actionSpeedList.add(new Modifier("baseActionSpeed",this.baseActionSpeed));
+		this.rangeSet.add(new Modifier("baseRange",this.baseRange).serialize());
+		this.actionSpeedSet.add(new Modifier("baseActionSpeed",this.baseActionSpeed).serialize());
 		
-		this.physicalAttackSuccessList=new ArrayList<Modifier>();
-		this.magicalAttackSuccessList=new ArrayList<Modifier>();
-		this.magicalAttackSuccessVarianceList=new ArrayList<Modifier>();
-		this.physicalAttackSuccessVarianceList=new ArrayList<Modifier>();
-		this.criticalPercentageList=new ArrayList<Modifier>();
-		this.criticalRatioList=new ArrayList<Modifier>();
+		this.physicalAttackSuccessSet=new HashSet<String>();
+		this.magicalAttackSuccessSet=new HashSet<String>();
+		this.magicalAttackSuccessVarianceSet=new HashSet<String>();
+		this.physicalAttackSuccessVarianceSet=new HashSet<String>();
+		this.criticalPercentageSet=new HashSet<String>();
+		this.criticalRatioSet=new HashSet<String>();
 		
-		this.criticalPercentageList.add(new Modifier("baseCriticalPercentage",this.baseCriticalPercentage));
-		this.criticalRatioList.add(new Modifier("baseCriticalRatio",this.baseCriticalRatio));
+		this.criticalPercentageSet.add(new Modifier("baseCriticalPercentage",this.baseCriticalPercentage).serialize());
+		this.criticalRatioSet.add(new Modifier("baseCriticalRatio",this.baseCriticalRatio).serialize());
 		
-		this.physicalDefenseSuccessList=new ArrayList<Modifier>();
-		this.magicalDefenseSuccessList=new ArrayList<Modifier>();
+		this.physicalDefenseSuccessSet=new HashSet<String>();
+		this.magicalDefenseSuccessSet=new HashSet<String>();
 		
-		this.dmgList=new ArrayList<Modifier>();
-		this.bluntDmgList=new ArrayList<Modifier>();
-		this.pierceDmgList=new ArrayList<Modifier>();
-		this.magicalDmgList=new ArrayList<Modifier>();
+		this.dmgSet=new HashSet<String>();
+		this.bluntDmgSet=new HashSet<String>();
+		this.pierceDmgSet=new HashSet<String>();
+		this.magicalDmgSet=new HashSet<String>();
 		
-		this.dmgVarianceList=new ArrayList<Modifier>();
-		this.bluntDmgVarianceList=new ArrayList<Modifier>();
-		this.pierceDmgVarianceList=new ArrayList<Modifier>();
-		this.magicalDmgVarianceList=new ArrayList<Modifier>();
+		this.dmgVarianceSet=new HashSet<String>();
+		this.bluntDmgVarianceSet=new HashSet<String>();
+		this.pierceDmgVarianceSet=new HashSet<String>();
+		this.magicalDmgVarianceSet=new HashSet<String>();
 		
-		this.physicalResistanceList=new ArrayList<Modifier>();
-		this.bluntResistanceList=new ArrayList<Modifier>();
-		this.pierceResistanceList=new ArrayList<Modifier>();
-		this.magicalResistanceList=new ArrayList<Modifier>();
+		this.physicalResistanceSet=new HashSet<String>();
+		this.bluntResistanceSet=new HashSet<String>();
+		this.pierceResistanceSet=new HashSet<String>();
+		this.magicalResistanceSet=new HashSet<String>();
 		
-		this.speedList=new ArrayList<Modifier>();
-		this.healthList=new ArrayList<Modifier>();
-		this.hungerList=new ArrayList<Modifier>();
-		this.thirstList=new ArrayList<Modifier>();
-		this.staminaList=new ArrayList<Modifier>();
-		this.thaumaList=new ArrayList<Modifier>();
-		this.breathList=new ArrayList<Modifier>();
-		//this.=new ArrayList<Modifier>();
+		this.speedSet=new HashSet<String>();
+		this.healthSet=new HashSet<String>();
+		this.hungerSet=new HashSet<String>();
+		this.thirstSet=new HashSet<String>();
+		this.staminaSet=new HashSet<String>();
+		this.thaumaSet=new HashSet<String>();
+		this.breathSet=new HashSet<String>();
+		//this.=new ArraySet<Modifier>();
 	}
 	
 	/**
 	 * calculate sum of modifiers
-	 * @param list
+	 * @param set
 	 * @return
 	 */
-	private float calculateSum(List<Modifier> list){
-		int i=0;
-		float r=0;
-		while(i<list.size()){
-			r+=list.get(i).getValue();
-			i++;
-			
+	private float calculateSum(Set<String> set){
+		float result=0;
+		Iterator<String> it=set.iterator();
+		while(it.hasNext()){
+			result+=Modifier.deserialize( it.next() ).getValue();
 		}
-		return r;
+		return result;
 	}
 	
 	/**
 	 * find modifier of given name
-	 * @param list
-	 * @param id
+	 * @param set
+	 * @param id identifier name of modifier
 	 * @return
 	 */
-	private int find(List<Modifier> list,String id){
-		int i=0;
-		boolean found=false;
-		while(i<list.size()){
-			if(list.get(i).getId().matches(id)){
-				found=true;
-				break;
-				}
-			i++;
+	private String find(Set<String> set,String id){
+		String result=null;
+		Iterator<String> it=set.iterator();
+		while(it.hasNext()){
+			String temp =it.next();
+			if(Modifier.deserialize(temp).getId().matches(id)){
+				return temp;
+			}
 		}
-		if(!found)
-			i=-1;
-		return i;
+		return result;
 	}
 	
 	/**
-	 * remove modifier in list
-	 * @param list
+	 * remove modifier in set
+	 * @param set
 	 * @param id
 	 * @return
 	 */
-	private boolean remove(List<Modifier> list,String id){
-		int i=find(list,id);
-		if(i==-1){
-			return false;
-			}
-		this.strengthList.remove(i);
-		return true;
+	private boolean remove(Set<String> set,String id){
+		String object=find(set,id);
+		if(object!=null){
+			set.remove(object);
+			return true;
+		}
+		return false;
 	}
 	
 	/**
 	 * find and replace 
-	 * @param list
+	 * @param set
 	 * @param modifier
 	 */
-	private void replace(List<Modifier> list,Modifier modifier){
-		int i=find(list,modifier.getId());
-		if(i!=-1){
-			list.remove(i);
-			list.add(modifier);
+	private void replace(Set<String> set,Modifier modifier){
+		String object=find(set,modifier.getId());
+		
+		if(object!=null){
+			set.remove(object);
+			set.add(modifier.serialize());
 		}else{
-			list.add(modifier);
+			set.add(modifier.serialize());
 		}
 		
 	}
@@ -427,197 +424,197 @@ public class RPGComponent implements Component {
 	}
 	
 	/**
-	 * add modifier from modifier list of given name
-	 * @param modifier to be added/replaced to list
-	 * @param name of list to be accessed
-	 * @return return false if list doesn't exist
+	 * add modifier from modifier set of given name
+	 * @param modifier to be added/replaced to set
+	 * @param name of set to be accessed
+	 * @return return false if set doesn't exist
 	 */
 	public boolean addModifier(Modifier modifier,String name){
 		boolean succes=false;
 		if(name.compareToIgnoreCase("Range")==0){
-			replace(this.rangeList,modifier);
-			this.range=calculateSum(this.rangeList);
+			replace(this.rangeSet,modifier);
+			this.range=calculateSum(this.rangeSet);
 			succes=true;
 			
 		}else if(name.compareToIgnoreCase("actionSpeed")==0){
-			replace(this.actionSpeedList,modifier);
-			this.actionSpeed=calculateSum(this.actionSpeedList);
+			replace(this.actionSpeedSet,modifier);
+			this.actionSpeed=calculateSum(this.actionSpeedSet);
 			succes=true;
 			
 		}else if(name.compareToIgnoreCase("strength")==0){
-			replace(this.strengthList,modifier);
-			this.strength=calculateSum(this.strengthList);
+			replace(this.strengthSet,modifier);
+			this.strength=calculateSum(this.strengthSet);
 			strengthEffects();
 			succes=true;
 			
 		}else if(name.compareToIgnoreCase("agility")==0){
-			replace(this.agilityList,modifier);
-			this.agility=calculateSum(this.agilityList);
+			replace(this.agilitySet,modifier);
+			this.agility=calculateSum(this.agilitySet);
 			agilityEffects();
 			succes=true;
 			
 		}else if(name.compareToIgnoreCase("constitution")==0){
-			replace(this.constitutionList,modifier);
-			this.constitution=calculateSum(this.constitutionList);
+			replace(this.constitutionSet,modifier);
+			this.constitution=calculateSum(this.constitutionSet);
 			constitutionEffects();
 			succes=true;
 			
 		}else if(name.compareToIgnoreCase("intelligence")==0){
-			replace(this.intelligenceList,modifier);
-			this.intelligence=calculateSum(this.intelligenceList);
+			replace(this.intelligenceSet,modifier);
+			this.intelligence=calculateSum(this.intelligenceSet);
 			intelligenceEffects();
 			succes=true;
 			
 		}else if(name.compareToIgnoreCase("wisdom")==0){
-			replace(this.wisdomList,modifier);
-			this.wisdom=calculateSum(this.wisdomList);
+			replace(this.wisdomSet,modifier);
+			this.wisdom=calculateSum(this.wisdomSet);
 			wisdomEffects();
 			succes=true;
 			
 		}else if(name.compareToIgnoreCase("thaumaticy")==0){
-			replace(this.thaumaticyList,modifier);
-			this.thaumaticy=calculateSum(this.thaumaticyList);
+			replace(this.thaumaticySet,modifier);
+			this.thaumaticy=calculateSum(this.thaumaticySet);
 			thaumaticyEffects();
 			succes=true;
 			
 		}else if(name.compareToIgnoreCase("charisma")==0){
-			replace(this.charismaList,modifier);
-			this.charisma=calculateSum(this.charismaList);
+			replace(this.charismaSet,modifier);
+			this.charisma=calculateSum(this.charismaSet);
 			charismaEffects();
 			succes=true;
 			
 		}else if(name.compareToIgnoreCase("luck")==0){
-			replace(this.luckList,modifier);
-			this.luck=calculateSum(this.luckList);
+			replace(this.luckSet,modifier);
+			this.luck=calculateSum(this.luckSet);
 			luckEffects();
 			succes=true;
 			
 		}else if(name.compareToIgnoreCase("physicalAttackSuccess")==0){
-			replace(this.physicalAttackSuccessList,modifier);
-			this.physicalAttackSuccess=calculateSum(this.physicalAttackSuccessList);
+			replace(this.physicalAttackSuccessSet,modifier);
+			this.physicalAttackSuccess=calculateSum(this.physicalAttackSuccessSet);
 			succes=true;
 			
 		}else if(name.compareToIgnoreCase("magicalAttackSuccess")==0){
-			replace(this.magicalAttackSuccessList,modifier);
-			this.magicalAttackSuccess=calculateSum(this.magicalAttackSuccessList);
+			replace(this.magicalAttackSuccessSet,modifier);
+			this.magicalAttackSuccess=calculateSum(this.magicalAttackSuccessSet);
 			succes=true;
 			
 		}else if(name.compareToIgnoreCase("physicalAttackSuccessVariance")==0){
-			replace(this.physicalAttackSuccessVarianceList,modifier);
-			this.physicalAttackSuccessVariance=calculateSum(this.physicalAttackSuccessVarianceList);
+			replace(this.physicalAttackSuccessVarianceSet,modifier);
+			this.physicalAttackSuccessVariance=calculateSum(this.physicalAttackSuccessVarianceSet);
 			succes=true;
 			
 		}else if(name.compareToIgnoreCase("magicalAttackSuccessVariance")==0){
-			replace(this.magicalAttackSuccessVarianceList,modifier);
-			this.magicalAttackSuccessVariance=calculateSum(this.magicalAttackSuccessVarianceList);
+			replace(this.magicalAttackSuccessVarianceSet,modifier);
+			this.magicalAttackSuccessVariance=calculateSum(this.magicalAttackSuccessVarianceSet);
 			succes=true;
 			
 		}else if(name.compareToIgnoreCase("criticalPercentage")==0){
-			replace(this.criticalPercentageList,modifier);
-			this.criticalPercentage=calculateSum(this.criticalPercentageList);
+			replace(this.criticalPercentageSet,modifier);
+			this.criticalPercentage=calculateSum(this.criticalPercentageSet);
 			succes=true;
 			
 		}else if(name.compareToIgnoreCase("criticalRatio")==0){
-			replace(this.criticalRatioList,modifier);
-			this.criticalRatio=calculateSum(this.criticalRatioList);
+			replace(this.criticalRatioSet,modifier);
+			this.criticalRatio=calculateSum(this.criticalRatioSet);
 			succes=true;
 			
 		}else if(name.compareToIgnoreCase("physicalDefenseSuccess")==0){
-			replace(this.physicalDefenseSuccessList,modifier);
-			this.physicalDefenseSuccess=calculateSum(this.physicalDefenseSuccessList);
+			replace(this.physicalDefenseSuccessSet,modifier);
+			this.physicalDefenseSuccess=calculateSum(this.physicalDefenseSuccessSet);
 			succes=true;
 						
 		}else if(name.compareToIgnoreCase("magicalDefenseSuccess")==0){
-			replace(this.magicalDefenseSuccessList,modifier);
-			this.magicalDefenseSuccess=calculateSum(this.magicalDefenseSuccessList);
+			replace(this.magicalDefenseSuccessSet,modifier);
+			this.magicalDefenseSuccess=calculateSum(this.magicalDefenseSuccessSet);
 			succes=true;
 						
 		}else if(name.compareToIgnoreCase("dmg")==0){
-			replace(this.dmgList,modifier);
-			this.dmg=calculateSum(this.dmgList);
+			replace(this.dmgSet,modifier);
+			this.dmg=calculateSum(this.dmgSet);
 			succes=true;
 						
 		}else if(name.compareToIgnoreCase("bluntDmg")==0){
-			replace(this.bluntDmgList,modifier);
-			this.bluntDmg=calculateSum(this.bluntDmgList);
+			replace(this.bluntDmgSet,modifier);
+			this.bluntDmg=calculateSum(this.bluntDmgSet);
 			succes=true;
 						
 		}else if(name.compareToIgnoreCase("pierceDmg")==0){
-			replace(this.pierceDmgList,modifier);
-			this.pierceDmg=calculateSum(this.pierceDmgList);
+			replace(this.pierceDmgSet,modifier);
+			this.pierceDmg=calculateSum(this.pierceDmgSet);
 			succes=true;
 						
 		}else if(name.compareToIgnoreCase("magicalDmg")==0){
-			replace(this.magicalDmgList,modifier);
-			this.magicalDmg=calculateSum(this.magicalDmgList);
+			replace(this.magicalDmgSet,modifier);
+			this.magicalDmg=calculateSum(this.magicalDmgSet);
 			succes=true;
 						
 		}else if(name.compareToIgnoreCase("dmgVariance")==0){
-			replace(this.dmgVarianceList,modifier);
-			this.dmgVariance=calculateSum(this.dmgVarianceList);
+			replace(this.dmgVarianceSet,modifier);
+			this.dmgVariance=calculateSum(this.dmgVarianceSet);
 			succes=true;
 						
 		}else if(name.compareToIgnoreCase("bluntDmgVariance")==0){
-			replace(this.bluntDmgVarianceList,modifier);
-			this.bluntDmgVariance=calculateSum(this.bluntDmgVarianceList);
+			replace(this.bluntDmgVarianceSet,modifier);
+			this.bluntDmgVariance=calculateSum(this.bluntDmgVarianceSet);
 			succes=true;
 						
 		}else if(name.compareToIgnoreCase("pierceDmgVariance")==0){
-			replace(this.pierceDmgVarianceList,modifier);
-			this.pierceDmgVariance=calculateSum(this.pierceDmgVarianceList);
+			replace(this.pierceDmgVarianceSet,modifier);
+			this.pierceDmgVariance=calculateSum(this.pierceDmgVarianceSet);
 			succes=true;
 						
 		}else if(name.compareToIgnoreCase("magicalDmgVariance")==0){
-			replace(this.magicalDmgVarianceList,modifier);
-			this.magicalDmgVariance=calculateSum(this.magicalDmgVarianceList);
+			replace(this.magicalDmgVarianceSet,modifier);
+			this.magicalDmgVariance=calculateSum(this.magicalDmgVarianceSet);
 			succes=true;
 						
 		}else if(name.compareToIgnoreCase("physicalResistance")==0){
-			replace(this.physicalResistanceList,modifier);
-			this.physicalResistance=calculateSum(this.physicalResistanceList);
+			replace(this.physicalResistanceSet,modifier);
+			this.physicalResistance=calculateSum(this.physicalResistanceSet);
 			succes=true;
 						
 		}else if(name.compareToIgnoreCase("bluntResistance")==0){
-			replace(this.bluntResistanceList,modifier);
-			this.bluntResistance=calculateSum(this.bluntResistanceList);
+			replace(this.bluntResistanceSet,modifier);
+			this.bluntResistance=calculateSum(this.bluntResistanceSet);
 			succes=true;
 						
 		}else if(name.compareToIgnoreCase("pierceResistance")==0){
-			replace(this.pierceResistanceList,modifier);
-			this.pierceResistance=calculateSum(this.pierceResistanceList);
+			replace(this.pierceResistanceSet,modifier);
+			this.pierceResistance=calculateSum(this.pierceResistanceSet);
 			succes=true;
 						
 		}else if(name.compareToIgnoreCase("magicalResistance")==0){
-			replace(this.magicalResistanceList,modifier);
-			this.magicalResistance=calculateSum(this.magicalResistanceList);
+			replace(this.magicalResistanceSet,modifier);
+			this.magicalResistance=calculateSum(this.magicalResistanceSet);
 			succes=true;
 						
 		}else if(name.compareToIgnoreCase("speed")==0){
-			replace(this.speedList,modifier);
+			replace(this.speedSet,modifier);
 			succes=true;
 					
 		}else if(name.compareToIgnoreCase("health")==0){
-			replace(this.healthList,modifier);
+			replace(this.healthSet,modifier);
 			succes=true;
 						
 		}else if(name.compareToIgnoreCase("hunger")==0){
-			replace(this.hungerList,modifier);
+			replace(this.hungerSet,modifier);
 			succes=true;
 					
 		}else if(name.compareToIgnoreCase("thirst")==0){
-			replace(this.thirstList,modifier);
+			replace(this.thirstSet,modifier);
 			succes=true;
 						
 		}else if(name.compareToIgnoreCase("stamina")==0){
-			replace(this.staminaList,modifier);
+			replace(this.staminaSet,modifier);
 			succes=true;
 						
 		}else if(name.compareToIgnoreCase("thauma")==0){
-			replace(this.thaumaList,modifier);
+			replace(this.thaumaSet,modifier);
 			succes=true;
 						
-		}else if(name.compareToIgnoreCase("List")==0){
-			replace(this.breathList,modifier);
+		}else if(name.compareToIgnoreCase("Set")==0){
+			replace(this.breathSet,modifier);
 			succes=true;
 						
 		}
@@ -625,171 +622,171 @@ public class RPGComponent implements Component {
 	}
 	
 	/**
-	 * remove modifier from modifier list of given name
-	 * @param id of modifier to be removed from list
-	 * @param name of list to be accessed
-	 * @return false if modifier do not exit on given list
+	 * remove modifier from modifier set of given name
+	 * @param id of modifier to be removed from set
+	 * @param name of set to be accessed
+	 * @return false if modifier do not exit on given set
 	 */
 	public boolean removeModifier(String id,String name){
 		boolean result=false;
 		if(name.compareToIgnoreCase("Range")==0){
-			result=remove(this.rangeList,id);
-			this.range=calculateSum(this.rangeList);
+			result=remove(this.rangeSet,id);
+			this.range=calculateSum(this.rangeSet);
 			
 		}else if(name.compareToIgnoreCase("actionSpeed")==0){
-			result=remove(this.actionSpeedList,id);
-			this.actionSpeed=calculateSum(this.actionSpeedList);
+			result=remove(this.actionSpeedSet,id);
+			this.actionSpeed=calculateSum(this.actionSpeedSet);
 			
 		}else if(name.compareToIgnoreCase("strength")==0){
-			result=remove(this.strengthList,id);
-			this.strength=calculateSum(this.strengthList);
+			result=remove(this.strengthSet,id);
+			this.strength=calculateSum(this.strengthSet);
 			strengthEffects();
 			
 		}else if(name.compareToIgnoreCase("agility")==0){
-			result=remove(this.agilityList,id);
-			this.agility=calculateSum(this.agilityList);
+			result=remove(this.agilitySet,id);
+			this.agility=calculateSum(this.agilitySet);
 			agilityEffects();
 			
 		}else if(name.compareToIgnoreCase("constitution")==0){
-			result=remove(this.constitutionList,id);
-			this.constitution=calculateSum(this.constitutionList);
+			result=remove(this.constitutionSet,id);
+			this.constitution=calculateSum(this.constitutionSet);
 			constitutionEffects();
 			
 		}else if(name.compareToIgnoreCase("intelligence")==0){
-			result=remove(this.intelligenceList,id);
-			this.intelligence=calculateSum(this.intelligenceList);
+			result=remove(this.intelligenceSet,id);
+			this.intelligence=calculateSum(this.intelligenceSet);
 			intelligenceEffects();
 			
 		}else if(name.compareToIgnoreCase("wisdom")==0){
-			result=remove(this.wisdomList,id);
-			this.wisdom=calculateSum(this.wisdomList);
+			result=remove(this.wisdomSet,id);
+			this.wisdom=calculateSum(this.wisdomSet);
 			wisdomEffects();
 			
 		}else if(name.compareToIgnoreCase("thaumaticy")==0){
-			result=remove(this.thaumaticyList,id);
-			this.thaumaticy=calculateSum(this.thaumaticyList);
+			result=remove(this.thaumaticySet,id);
+			this.thaumaticy=calculateSum(this.thaumaticySet);
 			thaumaticyEffects();
 			
 		}else if(name.compareToIgnoreCase("charisma")==0){
-			result=remove(this.charismaList,id);
-			this.charisma=calculateSum(this.charismaList);
+			result=remove(this.charismaSet,id);
+			this.charisma=calculateSum(this.charismaSet);
 			charismaEffects();
 			
 		}else if(name.compareToIgnoreCase("luck")==0){
-			result=remove(this.luckList,id);
-			this.luck=calculateSum(this.luckList);
+			result=remove(this.luckSet,id);
+			this.luck=calculateSum(this.luckSet);
 			luckEffects();
 			
 		}else if(name.compareToIgnoreCase("physicalAttackSuccess")==0){
-			result=remove(this.physicalAttackSuccessList,id);
-			this.physicalAttackSuccess=calculateSum(this.physicalAttackSuccessList);
+			result=remove(this.physicalAttackSuccessSet,id);
+			this.physicalAttackSuccess=calculateSum(this.physicalAttackSuccessSet);
 			
 		}else if(name.compareToIgnoreCase("magicalAttackSuccess")==0){
-			result=remove(this.magicalAttackSuccessList,id);
-			this.magicalAttackSuccess=calculateSum(this.magicalAttackSuccessList);
+			result=remove(this.magicalAttackSuccessSet,id);
+			this.magicalAttackSuccess=calculateSum(this.magicalAttackSuccessSet);
 			
 		}else if(name.compareToIgnoreCase("physicalAttackSuccessVariance")==0){
-			result=remove(this.physicalAttackSuccessVarianceList,id);
-			this.physicalAttackSuccessVariance=calculateSum(this.physicalAttackSuccessVarianceList);
+			result=remove(this.physicalAttackSuccessVarianceSet,id);
+			this.physicalAttackSuccessVariance=calculateSum(this.physicalAttackSuccessVarianceSet);
 			
 		}else if(name.compareToIgnoreCase("magicalAttackSuccessVariance")==0){
-			result=remove(this.magicalAttackSuccessVarianceList,id);
-			this.magicalAttackSuccessVariance=calculateSum(this.magicalAttackSuccessVarianceList);
+			result=remove(this.magicalAttackSuccessVarianceSet,id);
+			this.magicalAttackSuccessVariance=calculateSum(this.magicalAttackSuccessVarianceSet);
 			
 		}else if(name.compareToIgnoreCase("criticalPercentage")==0){
-			result=remove(this.criticalPercentageList,id);
-			this.criticalPercentage=calculateSum(this.criticalPercentageList);
+			result=remove(this.criticalPercentageSet,id);
+			this.criticalPercentage=calculateSum(this.criticalPercentageSet);
 			
 		}else if(name.compareToIgnoreCase("criticalRatio")==0){
-			result=remove(this.criticalRatioList,id);
-			this.criticalRatio=calculateSum(this.criticalRatioList);
+			result=remove(this.criticalRatioSet,id);
+			this.criticalRatio=calculateSum(this.criticalRatioSet);
 			
 		}else if(name.compareToIgnoreCase("physicalDefenseSuccess")==0){
-			result=remove(this.physicalDefenseSuccessList,id);
-			this.physicalDefenseSuccess=calculateSum(this.physicalDefenseSuccessList);
+			result=remove(this.physicalDefenseSuccessSet,id);
+			this.physicalDefenseSuccess=calculateSum(this.physicalDefenseSuccessSet);
 						
 		}else if(name.compareToIgnoreCase("magicalDefenseSuccess")==0){
-			result=remove(this.magicalDefenseSuccessList,id);
-			this.magicalDefenseSuccess=calculateSum(this.magicalDefenseSuccessList);
+			result=remove(this.magicalDefenseSuccessSet,id);
+			this.magicalDefenseSuccess=calculateSum(this.magicalDefenseSuccessSet);
 						
 		}else if(name.compareToIgnoreCase("dmg")==0){
-			result=remove(this.dmgList,id);
-			this.dmg=calculateSum(this.dmgList);
+			result=remove(this.dmgSet,id);
+			this.dmg=calculateSum(this.dmgSet);
 						
 		}else if(name.compareToIgnoreCase("bluntDmg")==0){
-			result=remove(this.bluntDmgList,id);
-			this.bluntDmg=calculateSum(this.bluntDmgList);
+			result=remove(this.bluntDmgSet,id);
+			this.bluntDmg=calculateSum(this.bluntDmgSet);
 						
 		}else if(name.compareToIgnoreCase("pierceDmg")==0){
-			result=remove(this.pierceDmgList,id);
-			this.pierceDmg=calculateSum(this.pierceDmgList);
+			result=remove(this.pierceDmgSet,id);
+			this.pierceDmg=calculateSum(this.pierceDmgSet);
 						
 		}else if(name.compareToIgnoreCase("magicalDmg")==0){
-			result=remove(this.magicalDmgList,id);
-			this.magicalDmg=calculateSum(this.magicalDmgList);
+			result=remove(this.magicalDmgSet,id);
+			this.magicalDmg=calculateSum(this.magicalDmgSet);
 						
 		}else if(name.compareToIgnoreCase("dmgVariance")==0){
-			result=remove(this.dmgVarianceList,id);
-			this.dmgVariance=calculateSum(this.dmgVarianceList);
+			result=remove(this.dmgVarianceSet,id);
+			this.dmgVariance=calculateSum(this.dmgVarianceSet);
 						
 		}else if(name.compareToIgnoreCase("bluntDmgVariance")==0){
-			result=remove(this.bluntDmgVarianceList,id);
-			this.bluntDmgVariance=calculateSum(this.bluntDmgVarianceList);
+			result=remove(this.bluntDmgVarianceSet,id);
+			this.bluntDmgVariance=calculateSum(this.bluntDmgVarianceSet);
 						
 		}else if(name.compareToIgnoreCase("pierceDmgVariance")==0){
-			result=remove(this.pierceDmgVarianceList,id);
-			this.pierceDmgVariance=calculateSum(this.pierceDmgVarianceList);
+			result=remove(this.pierceDmgVarianceSet,id);
+			this.pierceDmgVariance=calculateSum(this.pierceDmgVarianceSet);
 						
 		}else if(name.compareToIgnoreCase("magicalDmgVariance")==0){
-			result=remove(this.magicalDmgVarianceList,id);
-			this.magicalDmgVariance=calculateSum(this.magicalDmgVarianceList);
+			result=remove(this.magicalDmgVarianceSet,id);
+			this.magicalDmgVariance=calculateSum(this.magicalDmgVarianceSet);
 						
 		}else if(name.compareToIgnoreCase("physicalResistance")==0){
-			result=remove(this.physicalResistanceList,id);
-			this.physicalResistance=calculateSum(this.physicalResistanceList);
+			result=remove(this.physicalResistanceSet,id);
+			this.physicalResistance=calculateSum(this.physicalResistanceSet);
 						
 		}else if(name.compareToIgnoreCase("bluntResistance")==0){
-			result=remove(this.bluntResistanceList,id);
-			this.bluntResistance=calculateSum(this.bluntResistanceList);
+			result=remove(this.bluntResistanceSet,id);
+			this.bluntResistance=calculateSum(this.bluntResistanceSet);
 						
 		}else if(name.compareToIgnoreCase("pierceResistance")==0){
-			result=remove(this.pierceResistanceList,id);
-			this.pierceResistance=calculateSum(this.pierceResistanceList);
+			result=remove(this.pierceResistanceSet,id);
+			this.pierceResistance=calculateSum(this.pierceResistanceSet);
 						
 		}else if(name.compareToIgnoreCase("magicalResistance")==0){
-			result=remove(this.magicalResistanceList,id);
-			this.magicalResistance=calculateSum(this.magicalResistanceList);
+			result=remove(this.magicalResistanceSet,id);
+			this.magicalResistance=calculateSum(this.magicalResistanceSet);
 						
 		}else if(name.compareToIgnoreCase("speed")==0){
-			result=remove(this.speedList,id);
+			result=remove(this.speedSet,id);
 						
 		}else if(name.compareToIgnoreCase("health")==0){
-			result=remove(this.healthList,id);
+			result=remove(this.healthSet,id);
 						
 		}else if(name.compareToIgnoreCase("hunger")==0){
-			result=remove(this.hungerList,id);
+			result=remove(this.hungerSet,id);
 						
 		}else if(name.compareToIgnoreCase("thirst")==0){
-			result=remove(this.thirstList,id);
+			result=remove(this.thirstSet,id);
 						
 		}else if(name.compareToIgnoreCase("stamina")==0){
-			result=remove(this.staminaList,id);
+			result=remove(this.staminaSet,id);
 						
 		}else if(name.compareToIgnoreCase("thauma")==0){
-			result=remove(this.thaumaList,id);
+			result=remove(this.thaumaSet,id);
 						
-		}else if(name.compareToIgnoreCase("List")==0){
-			result=remove(this.breathList,id);			
+		}else if(name.compareToIgnoreCase("Set")==0){
+			result=remove(this.breathSet,id);			
 		}
 
 		return result;
 	}
 	
 	/**
-	 * remove modifier from modifier list of given name
-	 * @param id of modifier to be removed from list
-	 * @param name of list to be accessed
-	 * @return false if modifier do not exit on given list
+	 * remove modifier from modifier set of given name
+	 * @param id of modifier to be removed from set
+	 * @param name of set to be accessed
+	 * @return false if modifier do not exit on given set
 	 */
 	public boolean removeModifier(Modifier modifier,String name){
 		return removeModifier(modifier.getId(),name);
@@ -802,7 +799,7 @@ public class RPGComponent implements Component {
 	 */
 	public final void setBaseRange(float baseRange) {
 		this.baseRange = baseRange;
-		replace(this.rangeList,new Modifier("baseRange",this.baseRange));
+		replace(this.rangeSet,new Modifier("baseRange",this.baseRange));
 	}
 
 	/**
@@ -810,7 +807,7 @@ public class RPGComponent implements Component {
 	 */
 	public final void setBaseStrength(float baseStrength) {
 		this.baseStrength = baseStrength;
-		replace(this.strengthList,new Modifier("baseStrength",this.baseStrength));
+		replace(this.strengthSet,new Modifier("baseStrength",this.baseStrength));
 	}
 
 	/**
@@ -818,7 +815,7 @@ public class RPGComponent implements Component {
 	 */
 	public final void setBaseAgility(float baseAgility) {
 		this.baseAgility = baseAgility;
-		replace(this.agilityList,new Modifier("baseAgility",this.baseAgility));
+		replace(this.agilitySet,new Modifier("baseAgility",this.baseAgility));
 	}
 
 	/**
@@ -826,7 +823,7 @@ public class RPGComponent implements Component {
 	 */
 	public final void setBaseConstitution(float baseConstitution) {
 		this.baseConstitution = baseConstitution;
-		replace(this.constitutionList,new Modifier("baseConstitution",this.baseConstitution));
+		replace(this.constitutionSet,new Modifier("baseConstitution",this.baseConstitution));
 	}
 
 	/**
@@ -834,7 +831,7 @@ public class RPGComponent implements Component {
 	 */
 	public final void setBaseIntelligence(float baseIntelligence) {
 		this.baseIntelligence = baseIntelligence;
-		replace(this.intelligenceList,new Modifier("baseIntelligence",this.baseIntelligence));
+		replace(this.intelligenceSet,new Modifier("baseIntelligence",this.baseIntelligence));
 	}
 
 	/**
@@ -842,7 +839,7 @@ public class RPGComponent implements Component {
 	 */
 	public final void setBaseWisdom(float baseWisdom) {
 		this.baseWisdom = baseWisdom;
-		replace(this.wisdomList,new Modifier("baseWisdom",this.baseWisdom));
+		replace(this.wisdomSet,new Modifier("baseWisdom",this.baseWisdom));
 	}
 
 	/**
@@ -850,7 +847,7 @@ public class RPGComponent implements Component {
 	 */
 	public final void setBaseThaumaticy(float baseThaumaticy) {
 		this.baseThaumaticy = baseThaumaticy;
-		replace(this.thaumaticyList,new Modifier("baseThaumaticy",this.baseThaumaticy));
+		replace(this.thaumaticySet,new Modifier("baseThaumaticy",this.baseThaumaticy));
 	}
 
 	/**
@@ -858,7 +855,7 @@ public class RPGComponent implements Component {
 	 */
 	public final void setBaseCharisma(float baseCharisma) {
 		this.baseCharisma = baseCharisma;
-		replace(this.charismaList,new Modifier("baseCharisma",this.baseCharisma));
+		replace(this.charismaSet,new Modifier("baseCharisma",this.baseCharisma));
 	}
 
 
@@ -867,7 +864,7 @@ public class RPGComponent implements Component {
 	 */
 	public final void setBaseLuck(float baseLuck) {
 		this.baseLuck = baseLuck;
-		replace(this.luckList,new Modifier("baseLuck",this.baseLuck));
+		replace(this.luckSet,new Modifier("baseLuck",this.baseLuck));
 	}
 
 
@@ -876,7 +873,7 @@ public class RPGComponent implements Component {
 	 */
 	public final void setBaseCriticalPercentage(float baseCriticalPercentage) {
 		this.baseCriticalPercentage = baseCriticalPercentage;
-		replace(this.criticalPercentageList,new Modifier("baseCriticalPercentage",this.baseCriticalPercentage));
+		replace(this.criticalPercentageSet,new Modifier("baseCriticalPercentage",this.baseCriticalPercentage));
 	}
 
 	/**
@@ -884,7 +881,7 @@ public class RPGComponent implements Component {
 	 */
 	public final void setBaseCriticalRatio(float baseCriticalRatio) {
 		this.baseCriticalRatio = baseCriticalRatio;
-		replace(this.criticalRatioList,new Modifier("baseCriticalRatio",this.baseCriticalRatio));
+		replace(this.criticalRatioSet,new Modifier("baseCriticalRatio",this.baseCriticalRatio));
 	}
 
 	/**
@@ -892,7 +889,7 @@ public class RPGComponent implements Component {
 	 */
 	public void setBaseActionSpeed(float baseActionSpeed) {
 		this.baseActionSpeed = baseActionSpeed;
-		replace(this.actionSpeedList ,new Modifier("baseActionSpeed",this.baseActionSpeed));
+		replace(this.actionSpeedSet ,new Modifier("baseActionSpeed",this.baseActionSpeed));
 	}
 	
 	//------------------------------------------------------------------------------------------
@@ -908,547 +905,568 @@ public class RPGComponent implements Component {
 	/**
 	 * @return the range
 	 */
-	public final float getRange() {
+	public float getRange() {
 		return range;
+	}
+
+	/**
+	 * @return the baseActionSpeed
+	 */
+	public float getBaseActionSpeed() {
+		return baseActionSpeed;
 	}
 
 	/**
 	 * @return the actionSpeed
 	 */
-	public final float getActionSpeed() {
+	public float getActionSpeed() {
 		return actionSpeed;
+	}
+
+	/**
+	 * @return the physicalExperience
+	 */
+	public float getPhysicalExperience() {
+		return physicalExperience;
+	}
+
+	/**
+	 * @return the mentalExperience
+	 */
+	public float getMentalExperience() {
+		return mentalExperience;
+	}
+
+	/**
+	 * @return the experience
+	 */
+	public float getExperience() {
+		return experience;
 	}
 
 	/**
 	 * @return the baseStrength
 	 */
-	public final float getBaseStrength() {
+	public float getBaseStrength() {
 		return baseStrength;
 	}
 
 	/**
 	 * @return the baseAgility
 	 */
-	public final float getBaseAgility() {
+	public float getBaseAgility() {
 		return baseAgility;
 	}
 
 	/**
 	 * @return the baseConstitution
 	 */
-	public final float getBaseConstitution() {
+	public float getBaseConstitution() {
 		return baseConstitution;
 	}
 
 	/**
 	 * @return the baseIntelligence
 	 */
-	public final float getBaseIntelligence() {
+	public float getBaseIntelligence() {
 		return baseIntelligence;
 	}
 
 	/**
 	 * @return the baseWisdom
 	 */
-	public final float getBaseWisdom() {
+	public float getBaseWisdom() {
 		return baseWisdom;
 	}
 
 	/**
 	 * @return the baseThaumaticy
 	 */
-	public final float getBaseThaumaticy() {
+	public float getBaseThaumaticy() {
 		return baseThaumaticy;
 	}
 
 	/**
 	 * @return the baseCharisma
 	 */
-	public final float getBaseCharisma() {
+	public float getBaseCharisma() {
 		return baseCharisma;
 	}
 
 	/**
 	 * @return the baseLuck
 	 */
-	public final float getBaseLuck() {
+	public float getBaseLuck() {
 		return baseLuck;
 	}
 
 	/**
 	 * @return the agility
 	 */
-	public final float getAgility() {
+	public float getAgility() {
 		return agility;
 	}
 
 	/**
 	 * @return the strength
 	 */
-	public final float getStrength() {
+	public float getStrength() {
 		return strength;
 	}
 
 	/**
 	 * @return the constitution
 	 */
-	public final float getConstitution() {
+	public float getConstitution() {
 		return constitution;
 	}
 
 	/**
 	 * @return the intelligence
 	 */
-	public final float getIntelligence() {
+	public float getIntelligence() {
 		return intelligence;
 	}
 
 	/**
 	 * @return the wisdom
 	 */
-	public final float getWisdom() {
+	public float getWisdom() {
 		return wisdom;
 	}
 
 	/**
 	 * @return the thaumaticy
 	 */
-	public final float getThaumaticy() {
+	public float getThaumaticy() {
 		return thaumaticy;
 	}
 
 	/**
 	 * @return the charisma
 	 */
-	public final float getCharisma() {
+	public float getCharisma() {
 		return charisma;
 	}
 
 	/**
 	 * @return the luck
 	 */
-	public final float getLuck() {
+	public float getLuck() {
 		return luck;
 	}
 
 	/**
 	 * @return the physicalAttackSuccess
 	 */
-	public final float getPhysicalAttackSuccess() {
+	public float getPhysicalAttackSuccess() {
 		return physicalAttackSuccess;
 	}
 
 	/**
 	 * @return the magicalAttackSuccess
 	 */
-	public final float getMagicalAttackSuccess() {
+	public float getMagicalAttackSuccess() {
 		return magicalAttackSuccess;
 	}
 
 	/**
 	 * @return the magicalAttackSuccessVariance
 	 */
-	public final float getMagicalAttackSuccessVariance() {
+	public float getMagicalAttackSuccessVariance() {
 		return magicalAttackSuccessVariance;
 	}
 
 	/**
 	 * @return the physicalAttackSuccessVariance
 	 */
-	public final float getPhysicalAttackSuccessVariance() {
+	public float getPhysicalAttackSuccessVariance() {
 		return physicalAttackSuccessVariance;
 	}
 
 	/**
 	 * @return the baseCriticalPercentage
 	 */
-	public final float getBaseCriticalPercentage() {
+	public float getBaseCriticalPercentage() {
 		return baseCriticalPercentage;
 	}
 
 	/**
 	 * @return the criticalPercentage
 	 */
-	public final float getCriticalPercentage() {
+	public float getCriticalPercentage() {
 		return criticalPercentage;
 	}
 
 	/**
 	 * @return the baseCriticalRatio
 	 */
-	public final float getBaseCriticalRatio() {
+	public float getBaseCriticalRatio() {
 		return baseCriticalRatio;
 	}
 
 	/**
 	 * @return the criticalRatio
 	 */
-	public final float getCriticalRatio() {
+	public float getCriticalRatio() {
 		return criticalRatio;
 	}
 
 	/**
 	 * @return the physicalDefenseSuccess
 	 */
-	public final float getPhysicalDefenseSuccess() {
+	public float getPhysicalDefenseSuccess() {
 		return physicalDefenseSuccess;
 	}
 
 	/**
 	 * @return the magicalDefenseSuccess
 	 */
-	public final float getMagicalDefenseSuccess() {
+	public float getMagicalDefenseSuccess() {
 		return magicalDefenseSuccess;
 	}
 
 	/**
 	 * @return the dmg
 	 */
-	public final float getDmg() {
+	public float getDmg() {
 		return dmg;
 	}
 
 	/**
 	 * @return the bluntDmg
 	 */
-	public final float getBluntDmg() {
+	public float getBluntDmg() {
 		return bluntDmg;
 	}
 
 	/**
 	 * @return the pierceDmg
 	 */
-	public final float getPierceDmg() {
+	public float getPierceDmg() {
 		return pierceDmg;
 	}
 
 	/**
 	 * @return the magicalDmg
 	 */
-	public final float getMagicalDmg() {
+	public float getMagicalDmg() {
 		return magicalDmg;
 	}
 
 	/**
 	 * @return the dmgVariance
 	 */
-	public final float getDmgVariance() {
+	public float getDmgVariance() {
 		return dmgVariance;
 	}
 
 	/**
 	 * @return the bluntDmgVariance
 	 */
-	public final float getBluntDmgVariance() {
+	public float getBluntDmgVariance() {
 		return bluntDmgVariance;
 	}
 
 	/**
 	 * @return the pierceDmgVariance
 	 */
-	public final float getPierceDmgVariance() {
+	public float getPierceDmgVariance() {
 		return pierceDmgVariance;
 	}
 
 	/**
 	 * @return the magicalDmgVariance
 	 */
-	public final float getMagicalDmgVariance() {
+	public float getMagicalDmgVariance() {
 		return magicalDmgVariance;
 	}
 
 	/**
 	 * @return the physicalResistance
 	 */
-	public final float getPhysicalResistance() {
+	public float getPhysicalResistance() {
 		return physicalResistance;
 	}
 
 	/**
 	 * @return the bluntResistance
 	 */
-	public final float getBluntResistance() {
+	public float getBluntResistance() {
 		return bluntResistance;
 	}
 
 	/**
 	 * @return the pierceResistance
 	 */
-	public final float getPierceResistance() {
+	public float getPierceResistance() {
 		return pierceResistance;
 	}
 
 	/**
 	 * @return the magicalResistance
 	 */
-	public final float getMagicalResistance() {
+	public float getMagicalResistance() {
 		return magicalResistance;
 	}
 
 	/**
-	 * @return the rangeList
+	 * @return the rangeSet
 	 */
-	public final List<Modifier> getRangeList() {
-		return rangeList;
+	public HashSet<String> getRangeSet() {
+		return rangeSet;
 	}
 
 	/**
-	 * @return the actionSpeedList
+	 * @return the actionSpeedSet
 	 */
-	public final List<Modifier> getActionSpeedList() {
-		return actionSpeedList;
+	public HashSet<String> getActionSpeedSet() {
+		return actionSpeedSet;
 	}
 
 	/**
-	 * @return the strengthList
+	 * @return the strengthSet
 	 */
-	public final List<Modifier> getStrengthList() {
-		return strengthList;
+	public HashSet<String> getStrengthSet() {
+		return strengthSet;
 	}
 
 	/**
-	 * @return the agilityList
+	 * @return the agilitySet
 	 */
-	public final List<Modifier> getAgilityList() {
-		return agilityList;
+	public HashSet<String> getAgilitySet() {
+		return agilitySet;
 	}
 
 	/**
-	 * @return the constitutionList
+	 * @return the constitutionSet
 	 */
-	public final List<Modifier> getConstitutionList() {
-		return constitutionList;
+	public HashSet<String> getConstitutionSet() {
+		return constitutionSet;
 	}
 
 	/**
-	 * @return the intelligenceList
+	 * @return the intelligenceSet
 	 */
-	public final List<Modifier> getIntelligenceList() {
-		return intelligenceList;
+	public HashSet<String> getIntelligenceSet() {
+		return intelligenceSet;
 	}
 
 	/**
-	 * @return the wisdomList
+	 * @return the wisdomSet
 	 */
-	public final List<Modifier> getWisdomList() {
-		return wisdomList;
+	public HashSet<String> getWisdomSet() {
+		return wisdomSet;
 	}
 
 	/**
-	 * @return the thaumaticyList
+	 * @return the thaumaticySet
 	 */
-	public final List<Modifier> getThaumaticyList() {
-		return thaumaticyList;
+	public HashSet<String> getThaumaticySet() {
+		return thaumaticySet;
 	}
 
 	/**
-	 * @return the charismaList
+	 * @return the charismaSet
 	 */
-	public final List<Modifier> getCharismaList() {
-		return charismaList;
+	public HashSet<String> getCharismaSet() {
+		return charismaSet;
 	}
 
 	/**
-	 * @return the luckList
+	 * @return the luckSet
 	 */
-	public final List<Modifier> getLuckList() {
-		return luckList;
+	public HashSet<String> getLuckSet() {
+		return luckSet;
 	}
 
 	/**
-	 * @return the physicalAttackSuccessList
+	 * @return the physicalAttackSuccessSet
 	 */
-	public final List<Modifier> getPhysicalAttackSuccessList() {
-		return physicalAttackSuccessList;
+	public HashSet<String> getPhysicalAttackSuccessSet() {
+		return physicalAttackSuccessSet;
 	}
 
 	/**
-	 * @return the magicalAttackSuccessList
+	 * @return the magicalAttackSuccessSet
 	 */
-	public final List<Modifier> getMagicalAttackSuccessList() {
-		return magicalAttackSuccessList;
+	public HashSet<String> getMagicalAttackSuccessSet() {
+		return magicalAttackSuccessSet;
 	}
 
 	/**
-	 * @return the magicalAttackSuccessVarianceList
+	 * @return the magicalAttackSuccessVarianceSet
 	 */
-	public final List<Modifier> getMagicalAttackSuccessVarianceList() {
-		return magicalAttackSuccessVarianceList;
+	public HashSet<String> getMagicalAttackSuccessVarianceSet() {
+		return magicalAttackSuccessVarianceSet;
 	}
 
 	/**
-	 * @return the physicalAttackSuccessVarianceList
+	 * @return the physicalAttackSuccessVarianceSet
 	 */
-	public final List<Modifier> getPhysicalAttackSuccessVarianceList() {
-		return physicalAttackSuccessVarianceList;
+	public HashSet<String> getPhysicalAttackSuccessVarianceSet() {
+		return physicalAttackSuccessVarianceSet;
 	}
 
 	/**
-	 * @return the criticalPercentageList
+	 * @return the criticalPercentageSet
 	 */
-	public final List<Modifier> getCriticalPercentageList() {
-		return criticalPercentageList;
+	public HashSet<String> getCriticalPercentageSet() {
+		return criticalPercentageSet;
 	}
 
 	/**
-	 * @return the criticalRatioList
+	 * @return the criticalRatioSet
 	 */
-	public final List<Modifier> getCriticalRatioList() {
-		return criticalRatioList;
+	public HashSet<String> getCriticalRatioSet() {
+		return criticalRatioSet;
 	}
 
 	/**
-	 * @return the physicalDefenseSuccessList
+	 * @return the physicalDefenseSuccessSet
 	 */
-	public final List<Modifier> getPhysicalDefenseSuccessList() {
-		return physicalDefenseSuccessList;
+	public HashSet<String> getPhysicalDefenseSuccessSet() {
+		return physicalDefenseSuccessSet;
 	}
 
 	/**
-	 * @return the magicalDefenseSuccessList
+	 * @return the magicalDefenseSuccessSet
 	 */
-	public final List<Modifier> getMagicalDefenseSuccessList() {
-		return magicalDefenseSuccessList;
+	public HashSet<String> getMagicalDefenseSuccessSet() {
+		return magicalDefenseSuccessSet;
 	}
 
 	/**
-	 * @return the dmgList
+	 * @return the dmgSet
 	 */
-	public final List<Modifier> getDmgList() {
-		return dmgList;
+	public HashSet<String> getDmgSet() {
+		return dmgSet;
 	}
 
 	/**
-	 * @return the bluntDmgList
+	 * @return the bluntDmgSet
 	 */
-	public final List<Modifier> getBluntDmgList() {
-		return bluntDmgList;
+	public HashSet<String> getBluntDmgSet() {
+		return bluntDmgSet;
 	}
 
 	/**
-	 * @return the pierceDmgList
+	 * @return the pierceDmgSet
 	 */
-	public final List<Modifier> getPierceDmgList() {
-		return pierceDmgList;
+	public HashSet<String> getPierceDmgSet() {
+		return pierceDmgSet;
 	}
 
 	/**
-	 * @return the magicalDmgList
+	 * @return the magicalDmgSet
 	 */
-	public final List<Modifier> getMagicalDmgList() {
-		return magicalDmgList;
+	public HashSet<String> getMagicalDmgSet() {
+		return magicalDmgSet;
 	}
 
 	/**
-	 * @return the dmgVarianceList
+	 * @return the dmgVarianceSet
 	 */
-	public final List<Modifier> getDmgVarianceList() {
-		return dmgVarianceList;
+	public HashSet<String> getDmgVarianceSet() {
+		return dmgVarianceSet;
 	}
 
 	/**
-	 * @return the bluntDmgVarianceList
+	 * @return the bluntDmgVarianceSet
 	 */
-	public final List<Modifier> getBluntDmgVarianceList() {
-		return bluntDmgVarianceList;
+	public HashSet<String> getBluntDmgVarianceSet() {
+		return bluntDmgVarianceSet;
 	}
 
 	/**
-	 * @return the pierceDmgVarianceList
+	 * @return the pierceDmgVarianceSet
 	 */
-	public final List<Modifier> getPierceDmgVarianceList() {
-		return pierceDmgVarianceList;
+	public HashSet<String> getPierceDmgVarianceSet() {
+		return pierceDmgVarianceSet;
 	}
 
 	/**
-	 * @return the magicalDmgVarianceList
+	 * @return the magicalDmgVarianceSet
 	 */
-	public final List<Modifier> getMagicalDmgVarianceList() {
-		return magicalDmgVarianceList;
+	public HashSet<String> getMagicalDmgVarianceSet() {
+		return magicalDmgVarianceSet;
 	}
 
 	/**
-	 * @return the physicalResistanceList
+	 * @return the physicalResistanceSet
 	 */
-	public final List<Modifier> getPhysicalResistanceList() {
-		return physicalResistanceList;
+	public HashSet<String> getPhysicalResistanceSet() {
+		return physicalResistanceSet;
 	}
 
 	/**
-	 * @return the bluntResistanceList
+	 * @return the bluntResistanceSet
 	 */
-	public final List<Modifier> getBluntResistanceList() {
-		return bluntResistanceList;
+	public HashSet<String> getBluntResistanceSet() {
+		return bluntResistanceSet;
 	}
 
 	/**
-	 * @return the pierceResistanceList
+	 * @return the pierceResistanceSet
 	 */
-	public final List<Modifier> getPierceResistanceList() {
-		return pierceResistanceList;
+	public HashSet<String> getPierceResistanceSet() {
+		return pierceResistanceSet;
 	}
 
 	/**
-	 * @return the magicalResistanceList
+	 * @return the magicalResistanceSet
 	 */
-	public final List<Modifier> getMagicalResistanceList() {
-		return magicalResistanceList;
+	public HashSet<String> getMagicalResistanceSet() {
+		return magicalResistanceSet;
 	}
 
 	/**
-	 * @return the speedList
+	 * @return the speedSet
 	 */
-	public final List<Modifier> getSpeedList() {
-		return speedList;
+	public HashSet<String> getSpeedSet() {
+		return speedSet;
 	}
 
 	/**
-	 * @return the healthList
+	 * @return the healthSet
 	 */
-	public final List<Modifier> getHealthList() {
-		return healthList;
+	public HashSet<String> getHealthSet() {
+		return healthSet;
 	}
 
 	/**
-	 * @return the hungerList
+	 * @return the hungerSet
 	 */
-	public final List<Modifier> getHungerList() {
-		return hungerList;
+	public HashSet<String> getHungerSet() {
+		return hungerSet;
 	}
 
 	/**
-	 * @return the thirstList
+	 * @return the thirstSet
 	 */
-	public final List<Modifier> getThirstList() {
-		return thirstList;
+	public HashSet<String> getThirstSet() {
+		return thirstSet;
 	}
 
 	/**
-	 * @return the staminaList
+	 * @return the staminaSet
 	 */
-	public final List<Modifier> getStaminaList() {
-		return staminaList;
+	public HashSet<String> getStaminaSet() {
+		return staminaSet;
 	}
 
 	/**
-	 * @return the thaumaList
+	 * @return the thaumaSet
 	 */
-	public final List<Modifier> getThaumaList() {
-		return thaumaList;
+	public HashSet<String> getThaumaSet() {
+		return thaumaSet;
 	}
 
 	/**
-	 * @return the breathList
+	 * @return the breathSet
 	 */
-	public final List<Modifier> getBreathList() {
-		return breathList;
-	}
-
-	/**
-	 * @return the baseActionSpeed
-	 */
-	public final float getBaseActionSpeed() {
-		return baseActionSpeed;
+	public HashSet<String> getBreathSet() {
+		return breathSet;
 	}
 
 }

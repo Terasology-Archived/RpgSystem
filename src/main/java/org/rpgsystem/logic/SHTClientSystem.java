@@ -31,6 +31,6 @@ public class SHTClientSystem extends BaseComponentSystem {
 
     @Override
     public void preBegin() {
-        nuiManager.getHUD().addHUDElement("RpgSystem:SHTT");
+        nuiManager.getHUD().addHUDElement("RpgSystem:SHT");
     }
 }

@@ -54,23 +54,25 @@ public final class SHTUtils {
 
     	int s=0;
     	float currentStamina=stamina.lastStamina;
-    	while(s<seconds){
-    		if(currentStamina<stamina.decreasedReGenThreshold){
-    			stamina.decreaseTimeLeft+=stamina.ThresholdPunishmentPerSec;
-    		}
-    		if(stamina.decreaseTimeLeft>0){
-    			stamina.decreaseTimeLeft-=1000;
-    			reGen+=stamina.reGenPerSecond*stamina.decreasedReGenRatio;
-    		}else{
-    			reGen+=stamina.reGenPerSecond;
-    		}
-    		if(stamina.isRunning){
-    			reGen-=stamina.sprintStaminaPerSec;
-    		}
-    		s++;
-    	}
-		addHungerForEntity(entity,seconds*stamina.hungerPerReGenRatio);
-		addThirstForEntity(entity,seconds*stamina.thirstPerReGenRatio);
+    	if(stamina.lastStamina<stamina.maxStamina){
+	    	while(s<seconds){
+	    		if(currentStamina<stamina.decreasedReGenThreshold){
+	    			stamina.decreaseTimeLeft+=stamina.ThresholdPunishmentPerSec;
+	    		}
+	    		if(stamina.decreaseTimeLeft>0){
+	    			stamina.decreaseTimeLeft-=1000;
+	    			reGen+=stamina.reGenPerSecond*stamina.decreasedReGenRatio;
+	    		}else{
+	    			reGen+=stamina.reGenPerSecond;
+	    		}
+	    		if(stamina.isRunning){
+	    			reGen-=stamina.sprintStaminaPerSec;
+	    		}
+	    		s++;
+	    	}
+	    	addHungerForEntity(entity,seconds*stamina.hungerPerReGenRatio);
+			addThirstForEntity(entity,seconds*stamina.thirstPerReGenRatio);
+		}
 		stamina.lastCalculationTime=gameTime;
 		stamina.lastStamina=Math.min(Math.max(stamina.minStamina, stamina.lastStamina + reGen),stamina.maxStamina);
 		entity.saveComponent(stamina);
@@ -247,7 +249,7 @@ public final class SHTUtils {
             return 0;
         }
         float lvl=0;
-        
+        //TODO
         
         
         return lvl;

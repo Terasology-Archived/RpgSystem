@@ -1,5 +1,5 @@
 {
-    "type": "HungerAndThirstWindow",
+    "type": "SHTWindow",
     "skin": "HUD",
     "contents": {
         "type": "relativeLayout",
