@@ -30,11 +30,11 @@ public class RPGComponent implements Component {
 	
 	//characters range for actions
 	@Replicate
-	public float baseRange;
+	public float baseRange=1;
 	private float range;
 	//character action speed
 	@Replicate
-	public float baseActionSpeed;
+	public float baseActionSpeed=1;
 	private float actionSpeed;
 	
 	//experience
@@ -62,21 +62,21 @@ public class RPGComponent implements Component {
 	
 	//Atributes
 	@Replicate
-	public float baseStrength;
+	public float baseStrength=1;
 	@Replicate
-	public float baseAgility;
+	public float baseAgility=1;
 	@Replicate
-	public float baseConstitution;
+	public float baseConstitution=1;
 	@Replicate
-	public float baseIntelligence;	
+	public float baseIntelligence=1;	
 	@Replicate
-	public float baseWisdom;	
+	public float baseWisdom=1;	
 	@Replicate
-	public float baseThaumaticy;	
+	public float baseThaumaticy=1;	
 	@Replicate
-	public float baseCharisma;	
+	public float baseCharisma=1;	
 	@Replicate
-	public float baseLuck;	
+	public float baseLuck=1;	
 	
 	private float agility;
 	private float strength;
@@ -127,50 +127,50 @@ public class RPGComponent implements Component {
 	private float pierceResistance;
 	private float magicalResistance;
 	
-	private List<Modifier> rangeList;
-	private List<Modifier> actionSpeedList;
+	private ArrayList<Modifier> rangeList;
+	private ArrayList<Modifier> actionSpeedList;
 	
-	private List<Modifier> strengthList;
-	private List<Modifier> agilityList;
-	private List<Modifier> constitutionList;
-	private List<Modifier> intelligenceList;
-	private List<Modifier> wisdomList;
-	private List<Modifier> thaumaticyList;
-	private List<Modifier> charismaList;
-	private List<Modifier> luckList;
+	private ArrayList<Modifier> strengthList;
+	private ArrayList<Modifier> agilityList;
+	private ArrayList<Modifier> constitutionList;
+	private ArrayList<Modifier> intelligenceList;
+	private ArrayList<Modifier> wisdomList;
+	private ArrayList<Modifier> thaumaticyList;
+	private ArrayList<Modifier> charismaList;
+	private ArrayList<Modifier> luckList;
 
-	private List<Modifier> physicalAttackSuccessList;
-	private List<Modifier> magicalAttackSuccessList;
-	private List<Modifier> magicalAttackSuccessVarianceList;
-	private List<Modifier> physicalAttackSuccessVarianceList;
-	private List<Modifier> criticalPercentageList;
-	private List<Modifier> criticalRatioList;
+	private ArrayList<Modifier> physicalAttackSuccessList;
+	private ArrayList<Modifier> magicalAttackSuccessList;
+	private ArrayList<Modifier> magicalAttackSuccessVarianceList;
+	private ArrayList<Modifier> physicalAttackSuccessVarianceList;
+	private ArrayList<Modifier> criticalPercentageList;
+	private ArrayList<Modifier> criticalRatioList;
 	
-	private List<Modifier> physicalDefenseSuccessList;
-	private List<Modifier> magicalDefenseSuccessList;
+	private ArrayList<Modifier> physicalDefenseSuccessList;
+	private ArrayList<Modifier> magicalDefenseSuccessList;
 	
-	private List<Modifier> dmgList;
-	private List<Modifier> bluntDmgList;
-	private List<Modifier> pierceDmgList;
-	private List<Modifier> magicalDmgList;
+	private ArrayList<Modifier> dmgList;
+	private ArrayList<Modifier> bluntDmgList;
+	private ArrayList<Modifier> pierceDmgList;
+	private ArrayList<Modifier> magicalDmgList;
 	
-	private List<Modifier> dmgVarianceList;
-	private List<Modifier> bluntDmgVarianceList;
-	private List<Modifier> pierceDmgVarianceList;
-	private List<Modifier> magicalDmgVarianceList;
+	private ArrayList<Modifier> dmgVarianceList;
+	private ArrayList<Modifier> bluntDmgVarianceList;
+	private ArrayList<Modifier> pierceDmgVarianceList;
+	private ArrayList<Modifier> magicalDmgVarianceList;
 	
-	private List<Modifier> physicalResistanceList;
-	private List<Modifier> bluntResistanceList;
-	private List<Modifier> pierceResistanceList;
-	private List<Modifier> magicalResistanceList;
+	private ArrayList<Modifier> physicalResistanceList;
+	private ArrayList<Modifier> bluntResistanceList;
+	private ArrayList<Modifier> pierceResistanceList;
+	private ArrayList<Modifier> magicalResistanceList;
 	
-	private List<Modifier> speedList;
-	private List<Modifier> healthList;
-	private List<Modifier> hungerList;
-	private List<Modifier> thirstList;
-	private List<Modifier> staminaList;
-	private List<Modifier> thaumaList;
-	private List<Modifier> breathList;
+	private ArrayList<Modifier> speedList;
+	private ArrayList<Modifier> healthList;
+	private ArrayList<Modifier> hungerList;
+	private ArrayList<Modifier> thirstList;
+	private ArrayList<Modifier> staminaList;
+	private ArrayList<Modifier> thaumaList;
+	private ArrayList<Modifier> breathList;
 	
 	/**
 	 * 
@@ -247,7 +247,7 @@ public class RPGComponent implements Component {
 		int i=0;
 		float r=0;
 		while(i<list.size()){
-			r+=list.get(i).getModifier();
+			r+=list.get(i).getValue();
 			i++;
 			
 		}

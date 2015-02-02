@@ -20,8 +20,8 @@ package org.rpgsystem.logic;
  * they contain id and float value
  * @author esereja <esereja@yahoo.co.uk>
  */
-public class Modifier {
-
+public class Modifier{
+	
 	/**
 	 * Identifier of modifier, use always same id for same source
 	 */
@@ -29,30 +29,30 @@ public class Modifier {
 	/**
 	 * modifier value
 	 */
-	protected float modifier;
+	protected float value;
 	
 	/**
 	 * this constructs modifier for RPGsystem
 	 * @param id Identifier of modifier, use always same id for same source
-	 * @param modifier value
+	 * @param value value
 	 */
-	public Modifier(String id,float modifier){
+	public Modifier(String id,float value){
 		this.id=id;
-		this.modifier=modifier;
+		this.value=value;
 	}
 
 	/**
 	 * @return the modifier
 	 */
-	public float getModifier() {
-		return modifier;
+	public float getValue() {
+		return value;
 	}
 
 	/**
-	 * @param modifier the modifier to set
+	 * @param value the modifier to set
 	 */
-	public void setModifier(float modifier) {
-		this.modifier = modifier;
+	public void setValue(float value) {
+		this.value = value;
 	}
 
 	/**

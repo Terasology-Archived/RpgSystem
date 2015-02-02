@@ -1,4 +1,4 @@
-package org.rpgsystem.logic;
+package org.rpgsystem.logic.authority;
 
 import org.rpgsystem.logic.component.RPGComponent;
 import org.terasology.engine.Time;
